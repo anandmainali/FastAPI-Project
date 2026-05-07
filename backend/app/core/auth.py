@@ -7,7 +7,7 @@ from app.core.clerk import clerk
 class AuthUser:
     def __init__(self, user_id: str, org_id: str, org_permissions: list):
         self.user_id = user_id
-        self.ord_id = org_id
+        self.org_id = org_id
         self.org_permissions = org_permissions
 
     def has_permission(self, permission: str) -> bool:
