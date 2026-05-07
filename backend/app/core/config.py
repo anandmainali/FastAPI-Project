@@ -13,6 +13,6 @@ class Config:
     FRONTEND_URL: str = os.getenv("FRONTEND_URL", "")
 
     FREE_TIER_MEMBERSHIP_LIMIT: int = 2
-    PRO_TIER_MEMBERSHIP_LIMIT = 0 limit
+    PRO_TIER_MEMBERSHIP_LIMIT = 0
 
 settings = Config()
