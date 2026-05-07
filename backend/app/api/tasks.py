@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from typing import List
 from app.core.database import get_db
-from app.core.auth import get_current_user, require_view, require_create, require_delete, require_edit
+from app.core.auth import AuthUser, get_current_user, require_view, require_create, require_delete, require_edit
 from app.models.task import Task
 from app.schemas.task import TaskCreate, TaskUpdate, TaskStatusUpdate, TaskResponse
 
@@ -77,7 +77,7 @@ def update_task(
     return task
 
 @router.delete('/{task_id}', status_code=status.HTTP_204_NO_CONTENT)
-def delete_task(task_id: str, user: AuthUser = Depends(delete_task), db: Session = Depends(get_db)):
+def delete_task(task_id: str, user: AuthUser = Depends(require_delete), db: Session = Depends(get_db)):
     task = db.query(Task).filter(
         Task.id == task_id,
         Task.org_id == user.org_id
